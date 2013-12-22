@@ -19,6 +19,7 @@
     use utils\net\SMTP\Message\Header\From;
     use utils\net\SMTP\Message\Header\Subject;
     use utils\net\SMTP\Message\Header\Date;
+    use utils\net\SMTP\Message\Header\ContentType;
     
     class Message implements Encodable
     {
@@ -166,6 +167,18 @@
             foreach($this->getHeaderSet() AS $header) {
                 $header->setEncoding($encoding);
             }
+        }
+        
+        /**
+         * Sets the content-type of the message
+         * @param string $type the the content-type of the message
+         * @return Message
+         */
+        
+        public function setContentType($type = NULL)
+        {
+            $this->headerSet->insert(new ContentType($type));
+            return $this;
         }
         
         /**
